@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)http://127.0.0.1:5500/one.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>QR Generator &amp; Scanner</title>
+    <script src="./index_files/qrcode.min.js.download"></script>
+    <style>
+      body{
+         background:linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
+         min-height: 100vh;
+         margin: 0;
+      }
+    #box{
+      width: 500px;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items:center ;
+      background:linear-gradient(pink, rgb(152, 93, 152));
+      position: absolute; 
+      top:50%;
+      left:50%;
+      transform: translate(-50%, -50%); /* for center remove extra spacing*/
+      flex-direction: column; /* for take button down*/
+      gap:15px;
+      padding: 25px; /* for down space*/
+      border: black solid 5px;
+     
+    }
+    #qrcode:not(:empty){
+      background-color: white;
+      padding: 15px; /* Space between QR code and border*/
+      border: 10px solid #000;
+      border-radius: 8px;
+      display: inline-block; /* box  is equal to QR code size */
+    }
+    </style>
+</head>
+<body>
+   <div id="box">
+    <h1>QR Code Generator</h1>
+
+    <input type="text" id="text" placeholder="Enter text">
+    <button onclick="generateQR()">Generate</button>
+
+    <div id="qrcode"></div>
+</div>
+    <script>
+        function generateQR() {
+            document.getElementById("qrcode").innerHTML = "";
+            new QRCode(document.getElementById("qrcode"), {
+                text: document.getElementById("text").value,
+                width: 200,
+                height: 200
+            });
+            
+        }
+    </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>
